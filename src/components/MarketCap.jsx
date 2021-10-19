@@ -10,6 +10,7 @@ export default function MarketCap(props) {
     async function apiCall(id){
         
         const {data} =await axios.get(MARKETCAP_INFO)
+        console.log(data)
         
         // const categoryData=await response.data
 

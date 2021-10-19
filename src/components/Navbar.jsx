@@ -3,36 +3,35 @@ import { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import axios from "axios";
-import {Link} from 'react-router-dom' 
+import { useHistory } from "react-router-dom";
+
 
 
 
 const response = await axios.get('https://api.coingecko.com/api/v3/coins/categories/list')
 const category_list=response.data;
-console.log(category_list[0].category_id)
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 
-
-
 export default function Navbar({ fixed }) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
-  const [selected,setSelected] = useState(' ')
-  console.log({selected})
 
-  async function onChange(e){
+  const history = useHistory();
+
+
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
+
+  async function onChangeD(e){
       let selectdrop = e.target.value;
-      setSelected(selectdrop)
+      history.push(`/categories/` + selectdrop)
+      location.reload()
   }
  
-
   
   return (
-    <>
+    <div>
       <nav className="relative flex flex-wrap items-center justify-between px-4 py-3 bg-indigo-700 mb-3">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
@@ -51,7 +50,7 @@ export default function Navbar({ fixed }) {
             </button>
           </div>
           <div>
-            <Menu as="div" className="relative inline-block text-left">
+            {/* <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                   Categories
@@ -86,20 +85,20 @@ export default function Navbar({ fixed }) {
                 </div>
                 </Menu.Items>
               </Transition>
-            </Menu>
+            </Menu> */}
           </div>
-          {/* <div>
-            <select className="block w-52 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" onChange={onChange}>
+          <div>
+            <select className="block w-52 text-gray-700 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" onChange={e => onChangeD(e)}>
               <option value="">
                 Categories
               </option>
               {category_list.map((category_id) => (
-              <option key={category_id.category_id+1} value={category_id.id}>
-                {category_id.name}
+              <option key={category_id.name} value={category_id.category_id}>
+                {category_id.category_id}
               </option>
               ))}
             </select>
-          </div> */}
+          </div>
           <div
             className={
               "lg:flex flex-grow items-center" +
@@ -136,6 +135,6 @@ export default function Navbar({ fixed }) {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 }
