@@ -1,7 +1,7 @@
 import React from 'react';
 import './stylesheets/index.css';
 import Convert from './components/converter';
-import Categories from './components/categories';
+// import Categories from './components/categories';
 import Category from './components/category';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
@@ -15,20 +15,24 @@ function App() {
   return (
     <Router>
     <div className="App">
+
       <div>
         <Navbar />
       </div>
+
       <div className="max-w-xl  m-auto pb-6 pt-14">
         <Convert/>
       </div>
+
       <div>
-      <Route exact path="/" component={MarketCap} />
-        
+       <Route exact path="/" component={MarketCap} />
       </div>
+
       <div>
-        <Route exact path="/" component={Categories} />
+        {/* <Route exact path="/" component={Categories} /> */}
         <Route exact path="/categories/:id" component={Category} />
       </div>
+      
     </div>
     </Router>
   )
