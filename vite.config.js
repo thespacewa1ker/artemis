@@ -13,7 +13,14 @@ export default defineConfig({
     'CATEGORIES_URL': `"${process.env.VITE_CATEGORIES_URL}"`,
     'COINS_URL': `"${process.env.VITE_COINS_URL}"`,
     'MARKETCAP_INFO':`"${process.env.VITE_MARKETCAP_INFO}"`,
+    'Category_COINS_URL':`"${process.env.VITE_Category_COINS_URL}"`,
     
 
+  },
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: false,
+    }
   }
 })
