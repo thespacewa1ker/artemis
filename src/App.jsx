@@ -6,6 +6,7 @@ import Category from './components/category';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import MarketCap from './components/MarketCap';
+import Category_converter from './components/Category_converter';
 
 
 
@@ -21,7 +22,9 @@ function App() {
       </div>
 
       <div className="max-w-xl  m-auto pb-6 pt-14">
-        <Convert/>
+      <Route exact path="/" component={Convert} />
+      <Route exact path="/categories/:id" component={Category_converter} />
+        
       </div>
 
       <div>
